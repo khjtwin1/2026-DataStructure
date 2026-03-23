@@ -1,0 +1,15 @@
+# Visual Studio 빌드 파일
+Project1/.vs/
+Project1/x64/
+Project1/Project1/x64/
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.idb
+*.ipch
+*.tlog
+*.recipe
+*.suo
+*.db
+*.vsidx
