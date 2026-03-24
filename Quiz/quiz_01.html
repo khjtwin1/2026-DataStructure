@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <script>
+            let answer = "";
+            function solution(n) {
+                if (n === 0) return answer;
+                return solution(Math.floor(n / 2)) + n % 2;
+            }
+            console.log(solution(13));
+        </script>
+    </body>
+</html>
