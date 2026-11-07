@@ -1,2 +1,64 @@
-var str = "헬로우 ~ 월드 ~~~";
-console.log(str);
+import { Node, LinkedList } from "./LinkedList.mjs";
+
+// let node1 = new Node(1);
+// let node2 = new Node(2);
+// let node3 = new Node(3);
+
+// node1.next = node2;
+// node2.next = node3;
+
+// console.log(node1.data);
+// console.log(node1.next.data);
+// console.log(node1.next.next.data);
+
+let list = new LinkedList();
+console.log("===== insertAt() 호출 =====");
+list.insertAt(0, 0);
+list.insertAt(1, 1);
+list.insertAt(2, 2);
+list.insertAt(3, 3);
+list.insertAt(4, 4);
+list.printAll();
+
+console.log("");
+console.log("===== clear() 호출 =====");
+list.clear();
+list.printAll();
+
+console.log("");
+console.log("===== insertLast() 호출 =====");
+list.insertLast(77);
+list.insertLast(78);
+list.insertLast(79);
+list.insertLast(80);
+list.printAll();
+
+
+console.log("");
+console.log("===== deleteAt() 호출 =====");
+// list.deleteAt(0);
+// list.deleteAt(1);
+list.printAll();
+
+
+console.log("");
+console.log("===== deleteLast() 호출 =====");
+list.deleteLast();  // list.deleteAt(3);
+list.printAll();
+
+console.log("");
+console.log("===== getNodeAt() 호출 =====");
+let secondNode =  list.getNodeAt(2);
+console.log(secondNode.data);
+
+
+
+
+
+
+
+
+
+
+
+

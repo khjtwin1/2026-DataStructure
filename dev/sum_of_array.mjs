@@ -1,17 +1,19 @@
 // for문을 이용해서 배열의 합 구하기 - 상향식 방법
 // function sumArray(arr) {
 //     let sum = 0;
-//     for (let i = 0; i <= arr.length; i++) {
-//         sum += i;
-//     }
+//     for(let i=0; i<arr.length; i++) {
+//         sum += arr[i];
+//     } // for
 //     return sum;
-// }
+// } // sumArray
 
 // 재귀함수를 이용해서 배열의 합 구하기 - 하향식 방법
 function sumArray(arr) {
-    if (arr.length === 1) return arr[0];
-    return sumArray(arr.slice(0, -1)) + arr[arr.length - 1];
-}
-let arr = [1, 2, 3, 4, 5];
 
+    if(arr.length===1) return arr[0];
+    return sumArray(arr.slice(0,-1)) + arr[arr.length-1]; 
+
+} // sumArray
+
+let arr = [1,2,3,4,5];
 console.log(sumArray(arr));
