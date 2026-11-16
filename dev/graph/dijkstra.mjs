@@ -1,81 +1,86 @@
 class City {
-    constructor(name) {
-        this.name = name;
-        this.adjacent_cities = {};
-    }
+  constructor(name) {
+    this.name = name;
+    this.adjacent_cities = {};
+  }
 
-    addAdjacentCity(city, distance) {
-        this.adjacent_cities[city.name] = distance;
-    }
+  addAdjacentCity(city, distance) {
+    this.adjacent_cities[city.name] = distance;
+  }
 
-    removeAdjacentCity(city) {
-        delete this.adjacent_cities[city.name];
-    }
+  removeAdjacentCity(city) {
+    delete this.adjacent_cities[city.name];
+  }
 } // class
 
 class Dijkstra {
+  constructor() {
+    this.all_cities = {};
+  } // constructor
 
-   constructor() {
-        this.all_cities = {};
-   } // constructor
+  registerCity(city) {
+    this.all_cities[city.name] = city;
+  } // registerCity
 
-   registerCity(city) {
-       this.all_cities[city.name] = city;
-   } // registerCity
+  shortestPath(start_city, end_city) {
+    // console.log(this.all_cities);
+    let visited_cities = {};
+    let unvisited_cities = {};
+    let shortest_path_table = {};
 
-   shortestPath(start_city, end_city) {
-        // console.log(this.all_cities);
-        let visited_cities = {};
-        let unvisited_cities = {};
-        let shortest_path_table = {};
+    // console.log(unvisited_cities);
 
-        // console.log(unvisited_cities);
+    for (let city_name in this.all_cities) {
+      // console.log(city_name);
+      unvisited_cities[city_name] = this.all_cities[city_name];
+    } // for
 
-        for(let city_name in this.all_cities) {
-            // console.log(city_name);
-            unvisited_cities[city_name] = this.all_cities[city_name];
-        } // for
+    // console.log(unvisited_cities);
 
-        // console.log(unvisited_cities);
+    if (unvisited_cities[start_city.name] === null) {
+      console.log("출발 도시가 등록되어 있지 않습니다.");
+      return null;
+    } else {
+      for (let city_name in unvisited_cities) {
+        shortest_path_table[city_name] = Infinity;
+      } // for
+    }
+    shortest_path_table[start_city.name] = 0;
+    // console.log(shortest_path_table);
 
-        if(unvisited_cities[start_city.name] === null) {
-            console.log("출발 도시가 등록되어 있지 않습니다.");
-            return null;
+    // console.log(Object.keys(unvisited_cities));
+
+    while (Object.keys(unvisited_cities).length > 0) {
+      let closest_city_name = null;
+      for (let city_name in unvisited_cities) {
+        if (
+          closest_city_name === null ||
+          shortest_path_table[city_name] <
+            shortest_path_table[closest_city_name]
+        ) {
+          closest_city_name = city_name;
         }
-        else {
-            for(let city_name in unvisited_cities) {
-                shortest_path_table[city_name] = Infinity;
-            } // for
+      } // for
+
+      visited_cities[closest_city_name] = unvisited_cities[closest_city_name];
+      delete unvisited_cities[closest_city_name];
+
+      for (let adjacent_city_name in visited_cities[closest_city_name]
+        .adjacent_cities) {
+        if (unvisited_cities[adjacent_city_name] === null) {
+          continue;
         }
-        shortest_path_table[start_city.name] = 0;
-        // console.log(shortest_path_table);
+        let distance =
+          shortest_path_table[closest_city_name] +
+          visited_cities[closest_city_name].adjacent_cities[adjacent_city_name];
 
-        // console.log(Object.keys(unvisited_cities));
-
-        while(Object.keys(unvisited_cities).length>0) {
-            let closest_city_name = null;
-            for(let city_name in unvisited_cities) {
-                if(closest_city_name===null || shortest_path_table[city_name] < shortest_path_table[closest_city_name] ) {
-                    closest_city_name = city_name;
-                }                
-            } // for
-
-            visited_cities[closest_city_name] = unvisited_cities[closest_city_name];
-            delete unvisited_cities[closest_city_name];
-
-            for(let adjacent_city_name in visited_cities[closest_city_name].adjacent_cities ) {
-                if(unvisited_cities[adjacent_city_name] === null) {
-                    continue;
-                }
-                let distance = shortest_path_table[closest_city_name] + visited_cities[closest_city_name].adjacent_cities[adjacent_city_name];
-
-                if(shortest_path_table[adjacent_city_name] > distance) {
-                    shortest_path_table[adjacent_city_name] = distance;
-                }
-            } // for
-        } // while
-        console.log(shortest_path_table);
-   } // shortestPath
+        if (shortest_path_table[adjacent_city_name] > distance) {
+          shortest_path_table[adjacent_city_name] = distance;
+        }
+      } // for
+    } // while
+    console.log(shortest_path_table);
+  } // shortestPath
 } // class Dijkstra
 
 let seoul = new City("서울");

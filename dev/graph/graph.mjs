@@ -1,23 +1,21 @@
 class Vertex {
+  constructor(value) {
+    this.value = value;
+    this.adjacent_vertices = [];
+  }
 
-    constructor(value) {
-        this.value = value;
-        this.adjacent_vertices = [];
-    }
+  addAdjacentVertex(vertex) {
+    this.adjacent_vertices.push(vertex);
+  }
 
-    addAdjacentVertex(vertex) {
-        this.adjacent_vertices.push(vertex);
+  removeAdjacentVertex(vertex) {
+    for (let i = 0; i < this.adjacent_vertices.length; i++) {
+      if (this.adjacent_vertices[i] === vertex) {
+        this.adjacent_vertices.splice(i, 1);
+      }
     }
-
-    removeAdjacentVertex(vertex) {
-        for(let i=0; i<this.adjacent_vertices.length; i++) {
-            if(this.adjacent_vertices[i]===vertex) {
-                this.adjacent_vertices.splice(i,1);
-            }
-        }
-    }
+  }
 } // class
-
 
 let jake = new Vertex("Jake");
 let ben = new Vertex("Ben");

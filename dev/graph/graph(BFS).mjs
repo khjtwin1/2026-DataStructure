@@ -1,47 +1,43 @@
 import { Queue } from "./../Queue.mjs";
 
 class Vertex {
+  constructor(value) {
+    this.value = value;
+    this.adjacent_vertices = [];
+  }
 
-    constructor(value) {
-        this.value = value;
-        this.adjacent_vertices = [];
-    }
+  addAdjacentVertex(vertex) {
+    this.adjacent_vertices.push(vertex);
+  }
 
-    addAdjacentVertex(vertex) {
-        this.adjacent_vertices.push(vertex);
+  removeAdjacentVertex(vertex) {
+    for (let i = 0; i < this.adjacent_vertices.length; i++) {
+      if (this.adjacent_vertices[i] === vertex) {
+        this.adjacent_vertices.splice(i, 1);
+      }
     }
-
-    removeAdjacentVertex(vertex) {
-        for(let i=0; i<this.adjacent_vertices.length; i++) {
-            if(this.adjacent_vertices[i]===vertex) {
-                this.adjacent_vertices.splice(i,1);
-            }
-        }
-    }
+  }
 } // class
 
 function BFS(vertex) {
+  let queue = new Queue();
+  let visited_vertices = {};
 
-    let queue = new Queue();
-    let visited_vertices = {};
+  visited_vertices[vertex.value] = true;
+  queue.enqueue(vertex);
+  while (queue.isEmpty() === false) {
+    let currentVertex = queue.dequeue().data;
+    console.log(`정점 : ${currentVertex.value}`);
 
-    visited_vertices[vertex.value] = true;
-    queue.enqueue(vertex);
-    while(queue.isEmpty()===false) {
-        let currentVertex = queue.dequeue().data;
-        console.log(`정점 : ${currentVertex.value}`);
-        
-        for(let adjacent of currentVertex.adjacent_vertices) {
-            if(visited_vertices[adjacent.value]===true) {
-                continue;
-            }
-            else {
-                visited_vertices[adjacent.value] = true;
-                queue.enqueue(adjacent);
-            }
-        } // for
-    } // while
-
+    for (let adjacent of currentVertex.adjacent_vertices) {
+      if (visited_vertices[adjacent.value] === true) {
+        continue;
+      } else {
+        visited_vertices[adjacent.value] = true;
+        queue.enqueue(adjacent);
+      }
+    } // for
+  } // while
 } // BFS
 
 let ben = new Vertex("Ben");
@@ -76,8 +72,6 @@ elin.addAdjacentVertex(david);
 elin.addAdjacentVertex(owen);
 
 owen.addAdjacentVertex(elin);
-
-
 
 // BFS(ben);
 

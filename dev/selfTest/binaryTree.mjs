@@ -36,11 +36,11 @@ class BinaryTree {
     this.preOrderTraversal(tree.getRightSubTree());
   }
 
-  inOrderTraveral(tree) {
+  inOrderTraversal(tree) {
     if (tree === null) return;
-    this.inOrderTraveral(tree.getLeftSubTree());
+    this.inOrderTraversal(tree.getLeftSubTree());
     console.log(tree.data);
-    this.inOrderTraveral(tree.getRightSubTree());
+    this.inOrderTraversal(tree.getRightSubTree());
   }
 
   postOrderTraversal(tree) {
